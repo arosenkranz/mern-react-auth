@@ -6,7 +6,10 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
+// Import routes
 const routes = require('./routes');
+
+// Set up Express
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -21,9 +24,10 @@ app.use(passport.session());
 
 // Serve up static assets
 app.use(express.static('client/build'));
-// Add routes, both API and view
+// Add routes, both API and route to client/build
 app.use(routes);
 
+// Set up passport to authenticate
 const User = require('./models/user');
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());

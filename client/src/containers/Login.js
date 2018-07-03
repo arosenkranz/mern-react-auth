@@ -9,20 +9,6 @@ class Login extends Component {
     password: ""
   }
 
-  componentDidMount() {
-    this.loginCheck();
-  }
-
-  loginCheck = () => {
-    API
-      .loginCheck()
-      .then(res => this.setState({ isLoggedIn: res.data.isLoggedIn}))
-      .catch(err => {
-        console.log(err);
-        this.setState({ isLoggedIn: false })
-      })
-  }
-
   handleInputChange = e => {
     const { name, value } = e.target;
 
@@ -31,6 +17,7 @@ class Login extends Component {
     })
   }
 
+  // Method to handle user login, should redirect to main page when done
   login = (e) => {
     e.preventDefault();
     API
@@ -40,10 +27,11 @@ class Login extends Component {
         this.setState({isLoggedIn: res.data})
 
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.response));
   }
 
   render() {
+    // If user is logged in, take them to main page
     if (this.state.isLoggedIn) {
       return <Redirect to="/"/>
     }

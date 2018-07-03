@@ -8,31 +8,15 @@ class Login extends Component {
     username: "",
     password: ""
   }
-
-  componentDidMount() {
-    this.loginCheck();
-  }
-
-  loginCheck = () => {
-    API
-      .loginCheck()
-      .then(res => this.setState({ isLoggedIn: res.data.isLoggedIn}))
-      .catch(err => {
-        console.log(err);
-        this.setState({ isLoggedIn: false })
-      })
-  }
-
+  
   handleInputChange = e => {
-    console.log(e.target)
-
     const { name, value } = e.target;
-    console.log(name,value);
     this.setState({
       [name] : value
     })
   }
 
+  // Method to register a new user
   register = (e) => {
     e.preventDefault();
     API
@@ -42,10 +26,11 @@ class Login extends Component {
         this.setState({ success: res.data })
 
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.response.data));
   }
 
   render() {
+    // If Signup was a success, take them to the Login page
     if (this.state.success) {
       return <Redirect to="/login" />
     }

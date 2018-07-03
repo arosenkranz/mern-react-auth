@@ -8,10 +8,12 @@ class Main extends Component {
     username: ""
   }
 
+  // Check login status on load
   componentDidMount() {
     this.loginCheck();
   }
 
+  // Check login status
   loginCheck = () => {
     API
       .loginCheck()
@@ -26,6 +28,7 @@ class Main extends Component {
 
   render() {
     
+    // If user isn't logged in, don't let them see this page
     if (!this.state.isLoggedIn) {
       return <Redirect to="/login"/>
     }

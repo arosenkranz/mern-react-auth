@@ -20,7 +20,12 @@ export default {
     return axios.get('/api/users/logout')
   },
   /* 
-    Path to register new user
+    Path to register new user, you can have more fields than this but "username" and "password" must exist
+
+    userInfo = {
+      username: "alex",
+      password: 12345Password!
+    }
   */
   register: function(userInfo) {
     return axios.post("/api/users/register", userInfo)
